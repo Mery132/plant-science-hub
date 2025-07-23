@@ -1,6 +1,5 @@
 name: Publish Website to GitHub Pages
 
-# Run this workflow every time you push to the 'main' branch
 on:
   push:
     branches: [ main ]
@@ -8,6 +7,12 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    
+    # --- ADD THIS PERMISSIONS BLOCK ---
+    permissions:
+      contents: write
+    # ------------------------------------
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -15,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9' # Specify your python version
+          python-version: '3.9'
 
       - name: Install dependencies
         run: |
@@ -24,7 +29,8 @@ jobs:
 
       - name: Build the website
         run: pelican content -s publishconf.py
-
+      
+      # This part of the script will now have permission to push
       - name: Deploy to GitHub Pages
         run: |
           ghp-import -n -m "Deploy website from latest commit" output
