@@ -39,5 +39,4 @@ THEME = 'themes/Flex'
 SITETITLE = 'Plant Science Hub'
 SITESUBTITLE = 'Your gateway to modern plant biology'
 SITELOGO = '/images/logo.png' # You'll need to create this image
-
 STATIC_PATHS = ['images']
